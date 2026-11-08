@@ -1,0 +1,53 @@
+# Time-axis (clock) registry. Every endpoint resolves to exactly ONE clock so a run can
+# never silently conflate calendar-event clocks with observation clocks or pseudotime.
+# is_serial            : does this clock come from repeated per-patient observations?
+# requires_controlled_access : is the underlying data behind Researcher-Gateway/dbGaP?
+# licenses_calendar_time : may a per-patient calendar-time forecast be claimed on it?
+overall_survival:
+  clock_kind: event_time
+  is_serial: false
+  requires_controlled_access: false
+  licenses_calendar_time: true
+  description: Time from baseline to death. Event clock; open GDC.
+
+progression:
+  clock_kind: event_time
+  is_serial: false
+  requires_controlled_access: true
+  licenses_calendar_time: true
+  description: Time to IMWG-defined progression. Event clock; controlled access.
+
+time_to_next_treatment:
+  clock_kind: event_time
+  is_serial: false
+  requires_controlled_access: false
+  licenses_calendar_time: true
+  description: >
+    Time to next-line therapy start (TT2L). Treatment-transition proxy derived from
+    regimen/line records. NOT drug resistance. Event clock.
+
+relapse:
+  clock_kind: event_time
+  is_serial: false
+  requires_controlled_access: true
+  licenses_calendar_time: true
+  description: Time to clinical relapse. Event clock; controlled access.
+
+clinical_biomarker:
+  clock_kind: observation_time
+  is_serial: true
+  requires_controlled_access: true
+  licenses_calendar_time: false
+  description: >
+    Serial disease-burden markers (M-protein, FLC, routine labs). This is the OBSERVATION
+    clock that the clinical-anchored latent state is fit against — it is a predictor clock,
+    not itself an event clock.
+
+molecular_pseudotime:
+  clock_kind: pseudotime
+  is_serial: false
+  requires_controlled_access: false
+  licenses_calendar_time: false
+  description: >
+    Cross-sectional, stage-ordered pseudotime (HD->MGUS->SMM->MM). Population-level ordering
+    only — NOT a per-patient calendar-time trajectory. Never licenses a calendar-time claim.

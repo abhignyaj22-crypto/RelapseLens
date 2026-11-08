@@ -1,0 +1,28 @@
+# Demo config for CI smoke test (uses make-demo-data output).
+seed: 7
+endpoint:
+  name: open_gdc_os
+paths:
+  clinical: data/demo/clinical.csv
+  cytogenetics: data/demo/cytogenetics.csv
+  omics: data/demo/omics.csv
+  outdir: outputs/demo_experiment
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  split_col: split
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, hyperdiploid]
+cohort:
+  matched_ablation: true
+  require_clinical: true
+  require_cytogenetics: true
+  require_omics: true
+evaluation:
+  repeated_splits: 3
+  horizon_months: 24
+  min_test_events: 5
+  min_subtype_events_hypothesis: 5
+  min_subtype_events_confirmatory: 15
+  external_validation_available: false

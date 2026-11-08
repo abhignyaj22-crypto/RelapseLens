@@ -1,0 +1,73 @@
+# Experiment 0 — open-GDC OS technical validation & residual-risk pilot.
+# OS endpoint: technical validation only; relapse/PFS claims are hard-gated off.
+seed: 42
+
+endpoint:
+  name: open_gdc_os
+
+paths:
+  clinical: data/real/clinical_survival.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/omics.csv
+  program_activity: data/real/program_activity.csv
+  gene_matrix: data/real/gene_matrix.npz   # raw log2(TPM+1) for leak-free in-fold PCA
+  outdir: outputs/experiment0_open_gdc_os
+
+# Omics PCA is fit IN-FOLD (train-only) from paths.gene_matrix; the precomputed
+# full-cohort PCs in omics.csv are no longer used on the evaluation path.
+features:
+  omics_k: 16
+  n_topvar: 2000
+
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  split_col: split
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, t_14_16, hyperdiploid]
+
+cohort:
+  matched_ablation: true
+  require_clinical: true
+  require_cytogenetics: true
+  require_omics: true
+
+splitting:
+  strategy: stratified_event
+
+preprocessing:
+  imputation: median
+  normalization: standardize
+  feature_selection:
+    max_omics_features: 16
+    fit_on: train_only
+
+model:
+  type: residual_tte
+  risk_decomposition: clinical_plus_molecular_residual
+  encoder:
+    type: mlp
+    latent_dim: 64
+    hidden_dims: [128, 64]
+    dropout: 0.10
+  survival_heads: [cox, aft, fht]
+
+training:
+  epochs: 200
+  batch_size: 64
+  learning_rate: 0.001
+  distillation:
+    enabled: true
+    start_epoch: 40
+    ramp_epochs: 20
+    weight: 0.05
+
+evaluation:
+  repeated_splits: 50
+  bootstrap: 500
+  horizon_months: 24
+  min_test_events: 20
+  min_subtype_events_hypothesis: 10
+  min_subtype_events_confirmatory: 30
+  external_validation_available: false

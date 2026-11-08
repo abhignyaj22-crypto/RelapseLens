@@ -1,0 +1,81 @@
+split_id,arm,plot_label,metric,value,endpoint,label_source,control_type
+0,clinical,Penalized Cox (reference),uno_cindex,0.7918472913857146,OS,none,reference
+0,clinical,Penalized Cox (reference),ipcw_ibs,0.1508986914129325,OS,none,reference
+1,clinical,Penalized Cox (reference),uno_cindex,0.6412311267198357,OS,none,reference
+1,clinical,Penalized Cox (reference),ipcw_ibs,0.14957739074056384,OS,none,reference
+2,clinical,Penalized Cox (reference),uno_cindex,0.7076296509230363,OS,none,reference
+2,clinical,Penalized Cox (reference),ipcw_ibs,0.12386107572002321,OS,none,reference
+3,clinical,Penalized Cox (reference),uno_cindex,0.7802114117550512,OS,none,reference
+3,clinical,Penalized Cox (reference),ipcw_ibs,0.14664005735232358,OS,none,reference
+4,clinical,Penalized Cox (reference),uno_cindex,0.7065020949122743,OS,none,reference
+4,clinical,Penalized Cox (reference),ipcw_ibs,0.12750303773040286,OS,none,reference
+0,clinical+omics,Clinical + omics Cox,uno_cindex,0.8258725157481227,OS,none,model
+0,clinical+omics,Clinical + omics Cox,ipcw_ibs,0.1417486281874295,OS,none,model
+1,clinical+omics,Clinical + omics Cox,uno_cindex,0.7037043245127843,OS,none,model
+1,clinical+omics,Clinical + omics Cox,ipcw_ibs,0.137146410872859,OS,none,model
+2,clinical+omics,Clinical + omics Cox,uno_cindex,0.7341441299463555,OS,none,model
+2,clinical+omics,Clinical + omics Cox,ipcw_ibs,0.10663835597215125,OS,none,model
+3,clinical+omics,Clinical + omics Cox,uno_cindex,0.7490101850454759,OS,none,model
+3,clinical+omics,Clinical + omics Cox,ipcw_ibs,0.1253993060821465,OS,none,model
+4,clinical+omics,Clinical + omics Cox,uno_cindex,0.7428343707620029,OS,none,model
+4,clinical+omics,Clinical + omics Cox,ipcw_ibs,0.1207468606750545,OS,none,model
+0,residual_risk,Residual-risk model,uno_cindex,0.8322099702954108,OS,none,model
+0,residual_risk,Residual-risk model,ipcw_ibs,0.14006928352623027,OS,none,model
+1,residual_risk,Residual-risk model,uno_cindex,0.6881099578317496,OS,none,model
+1,residual_risk,Residual-risk model,ipcw_ibs,0.14511401663716816,OS,none,model
+2,residual_risk,Residual-risk model,uno_cindex,0.7283848848405692,OS,none,model
+2,residual_risk,Residual-risk model,ipcw_ibs,0.10948734464114808,OS,none,model
+3,residual_risk,Residual-risk model,uno_cindex,0.7342634656866446,OS,none,model
+3,residual_risk,Residual-risk model,ipcw_ibs,0.12980683322837638,OS,none,model
+4,residual_risk,Residual-risk model,uno_cindex,0.745966140981342,OS,none,model
+4,residual_risk,Residual-risk model,ipcw_ibs,0.12083575584125673,OS,none,model
+0,clinical+cyto+omics,CNV-derived subtype-conditioned,uno_cindex,0.8236260032412424,OS,cnv_derived,observed_inferred
+0,clinical+cyto+omics,CNV-derived subtype-conditioned,ipcw_ibs,0.14351201167874125,OS,cnv_derived,observed_inferred
+1,clinical+cyto+omics,CNV-derived subtype-conditioned,uno_cindex,0.7005322291405135,OS,cnv_derived,observed_inferred
+1,clinical+cyto+omics,CNV-derived subtype-conditioned,ipcw_ibs,0.13820372890842703,OS,cnv_derived,observed_inferred
+2,clinical+cyto+omics,CNV-derived subtype-conditioned,uno_cindex,0.7248517338416941,OS,cnv_derived,observed_inferred
+2,clinical+cyto+omics,CNV-derived subtype-conditioned,ipcw_ibs,0.10766546457720072,OS,cnv_derived,observed_inferred
+3,clinical+cyto+omics,CNV-derived subtype-conditioned,uno_cindex,0.7379992574794443,OS,cnv_derived,observed_inferred
+3,clinical+cyto+omics,CNV-derived subtype-conditioned,ipcw_ibs,0.13017705756246895,OS,cnv_derived,observed_inferred
+4,clinical+cyto+omics,CNV-derived subtype-conditioned,uno_cindex,0.7402463699653196,OS,cnv_derived,observed_inferred
+4,clinical+cyto+omics,CNV-derived subtype-conditioned,ipcw_ibs,0.1208619338950565,OS,cnv_derived,observed_inferred
+0,pooled_neural,Pooled neural survival,uno_cindex,0.7796318436004158,OS,none,model_complexity
+0,pooled_neural,Pooled neural survival,ipcw_ibs,0.20116684181553668,OS,none,model_complexity
+1,pooled_neural,Pooled neural survival,uno_cindex,0.6616700472665075,OS,none,model_complexity
+1,pooled_neural,Pooled neural survival,ipcw_ibs,0.2141082504713955,OS,none,model_complexity
+2,pooled_neural,Pooled neural survival,uno_cindex,0.7352143752640273,OS,none,model_complexity
+2,pooled_neural,Pooled neural survival,ipcw_ibs,0.1449092051963052,OS,none,model_complexity
+3,pooled_neural,Pooled neural survival,uno_cindex,0.7201378526561717,OS,none,model_complexity
+3,pooled_neural,Pooled neural survival,ipcw_ibs,0.3009796426978495,OS,none,model_complexity
+4,pooled_neural,Pooled neural survival,uno_cindex,0.6388366581954724,OS,none,model_complexity
+4,pooled_neural,Pooled neural survival,ipcw_ibs,0.22280393874043367,OS,none,model_complexity
+0,scrambled_subtype,Scrambled-subtype control,uno_cindex,0.8240739599933257,OS,cnv_derived,scrambled_control
+0,scrambled_subtype,Scrambled-subtype control,ipcw_ibs,0.1427733035729973,OS,cnv_derived,scrambled_control
+1,scrambled_subtype,Scrambled-subtype control,uno_cindex,0.6997007413126718,OS,cnv_derived,scrambled_control
+1,scrambled_subtype,Scrambled-subtype control,ipcw_ibs,0.13688524447537886,OS,cnv_derived,scrambled_control
+2,scrambled_subtype,Scrambled-subtype control,uno_cindex,0.7403950801269286,OS,cnv_derived,scrambled_control
+2,scrambled_subtype,Scrambled-subtype control,ipcw_ibs,0.10565540041717582,OS,cnv_derived,scrambled_control
+3,scrambled_subtype,Scrambled-subtype control,uno_cindex,0.7344030821879654,OS,cnv_derived,scrambled_control
+3,scrambled_subtype,Scrambled-subtype control,ipcw_ibs,0.12614621271341192,OS,cnv_derived,scrambled_control
+4,scrambled_subtype,Scrambled-subtype control,uno_cindex,0.7123052097681847,OS,cnv_derived,scrambled_control
+4,scrambled_subtype,Scrambled-subtype control,ipcw_ibs,0.12238949634295955,OS,cnv_derived,scrambled_control
+0,permuted_omics,Permuted-omics control,uno_cindex,0.7694828223695781,OS,none,permuted_control
+0,permuted_omics,Permuted-omics control,ipcw_ibs,0.15335572364748482,OS,none,permuted_control
+1,permuted_omics,Permuted-omics control,uno_cindex,0.6182950303496679,OS,none,permuted_control
+1,permuted_omics,Permuted-omics control,ipcw_ibs,0.15304283637239544,OS,none,permuted_control
+2,permuted_omics,Permuted-omics control,uno_cindex,0.6776162027195239,OS,none,permuted_control
+2,permuted_omics,Permuted-omics control,ipcw_ibs,0.12467156141180075,OS,none,permuted_control
+3,permuted_omics,Permuted-omics control,uno_cindex,0.7362140030910275,OS,none,permuted_control
+3,permuted_omics,Permuted-omics control,ipcw_ibs,0.15459778665117677,OS,none,permuted_control
+4,permuted_omics,Permuted-omics control,uno_cindex,0.6749097579825106,OS,none,permuted_control
+4,permuted_omics,Permuted-omics control,ipcw_ibs,0.1317603600080217,OS,none,permuted_control
+0,random_label,Randomized survival-label control,uno_cindex,0.4980526588236555,OS,none,label_randomization
+0,random_label,Randomized survival-label control,ipcw_ibs,0.18359849371373965,OS,none,label_randomization
+1,random_label,Randomized survival-label control,uno_cindex,0.4601814165219819,OS,none,label_randomization
+1,random_label,Randomized survival-label control,ipcw_ibs,0.164239300562994,OS,none,label_randomization
+2,random_label,Randomized survival-label control,uno_cindex,0.5175898976763633,OS,none,label_randomization
+2,random_label,Randomized survival-label control,ipcw_ibs,0.20429795148013533,OS,none,label_randomization
+3,random_label,Randomized survival-label control,uno_cindex,0.5298943934113054,OS,none,label_randomization
+3,random_label,Randomized survival-label control,ipcw_ibs,0.14602816591320972,OS,none,label_randomization
+4,random_label,Randomized survival-label control,uno_cindex,0.42158987204349707,OS,none,label_randomization
+4,random_label,Randomized survival-label control,ipcw_ibs,0.23119474439098367,OS,none,label_randomization

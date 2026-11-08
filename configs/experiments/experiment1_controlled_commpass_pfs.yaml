@@ -1,0 +1,18 @@
+# Experiment 1 (FUTURE): controlled MMRF CoMMpass PFS — primary research endpoint.
+# Requires controlled-access progression dates (see docs/pfs_data_acquisition_plan.md).
+seed: 42
+endpoint:
+  name: controlled_commpass_pfs
+paths:
+  clinical: data/controlled/clinical_pfs.csv
+  cytogenetics: data/controlled/cytogenetics.csv
+  omics: data/controlled/omics.csv
+  outdir: outputs/experiment1_controlled_commpass_pfs
+schema:
+  id_col: patient_id
+  time_col: pfs_time
+  event_col: pfs_event
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, t_14_16, hyperdiploid]
+cohort: {matched_ablation: true, require_omics: true, require_cytogenetics: true}
+evaluation: {repeated_splits: 50, horizon_months: 18, external_validation_available: false}

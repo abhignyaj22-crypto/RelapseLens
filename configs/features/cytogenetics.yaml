@@ -1,0 +1,3 @@
+cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, t_14_16, hyperdiploid]
+binary: true
+provenance: data/real/cytogenetics_provenance.csv

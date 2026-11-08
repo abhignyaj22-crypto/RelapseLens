@@ -1,0 +1,22 @@
+# Stage-A leak-proof Experiment-0 re-baseline (in-fold PCA vs precomputed PCA).
+seed: 42
+endpoint:
+  name: open_gdc_os
+  claim_scope: overall_survival_only_not_relapse_or_pfs
+paths:
+  clinical: data/real/clinical_survival.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/omics.csv               # precomputed full-cohort PCs (the leak, for comparison)
+  gene_matrix: data/real/gene_matrix.npz   # fold-agnostic gene matrix for in-fold PCA
+  outdir: outputs/rebaseline_open_gdc_os
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, hyperdiploid]   # CNV-only (leak-free)
+validation:
+  rebaseline_folds: 5
+features:
+  n_topvar: 2000
+  omics_k_grid: [8, 16, 32, 64]            # pre-registered omics-width sweep

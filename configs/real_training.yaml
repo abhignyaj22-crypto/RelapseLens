@@ -1,0 +1,62 @@
+# Heavier configuration for real CoMMpass/MMRF/institutional runs.
+# Keep default.yaml small for smoke tests.
+seed: 42
+endpoint:
+  name: open_gdc_os
+  claim_scope: overall_survival_only_not_relapse_or_pfs
+paths:
+  clinical: data/real/clinical_survival.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/program_activity_or_omics.csv
+  outdir: outputs/real_run
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  split_col: split
+  clinical_cols: [age, sex_M, iss_2, iss_3, riss_2, riss_3, line_of_therapy]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, hyperdiploid]
+model:
+  # clinical_plus_molecular_residual -> emits clinical_risk, molecular_residual_risk,
+  # total_risk (molecular features orthogonalized w.r.t. clinical before the
+  # residual Cox, so the molecular term is genuine incremental risk).
+  risk_decomposition: clinical_plus_molecular_residual
+cohort:
+  # Scientific matched-cohort analysis: every model compared on the same patient
+  # intersection with all modalities. (Deployment-availability runs flip these off
+  # and set matched_ablation: false; label them "deployment availability analysis".)
+  require_omics: true
+  require_cytogenetics: true
+  matched_ablation: true
+splitting:
+  strategy: stratified_event
+validation:
+  repeated_splits: 50          # repeated stratified-event splits for mean/CI
+  horizon_months: 24           # landmark for calibration / DCA / NRI-IDI / event rates
+  external_validation_available: false  # set true only when a 2nd cohort is wired
+features:
+  use_clinical: true
+  use_cytogenetics: true
+  use_omics: true
+  omics_transform: auto
+  omics_pca_components: 64
+training:
+  epochs: 200
+  lr: 0.001
+  weight_decay: 0.0001
+  hidden_dim: 128
+  dropout: 0.20
+  patience: 30
+  distill_weight: 0.05
+  distill_start_epoch: 40
+  distill_ramp_epochs: 20
+  ema_decay: 0.98
+  temperature: 2.0
+experiments:
+  models: [subtype_event_rate, cox, opsd_cox, aft, opsd_aft, fht, opsd_fht]
+  min_subtype_n: 30
+  min_subtype_events: 10
+  min_subtype_events_hypothesis: 10     # 10-29 events -> hypothesis-generating
+  min_subtype_events_confirmatory: 30   # >=30 events + paired ΔCI>0 -> potentially confirmatory
+  bootstrap: 500
+  min_test_events: 20

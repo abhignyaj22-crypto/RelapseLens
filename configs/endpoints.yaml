@@ -1,0 +1,41 @@
+# Endpoint registry. The endpoint a run uses gates which claims are allowed.
+# The code REFUSES to emit relapse/PFS language when the endpoint is OS.
+# endpoint_type drives claim gating; relapse/PFS claims require a relapse-type endpoint.
+open_gdc_os:
+  endpoint_type: overall_survival
+  time_axis: overall_survival
+  role: technical_validation
+  primary_biological_claim_allowed: false
+  relapse_or_pfs_claim_allowed: false
+
+controlled_commpass_pfs:
+  endpoint_type: progression_free_survival
+  time_axis: progression
+  role: primary_research_endpoint
+  primary_biological_claim_allowed: true
+  relapse_or_pfs_claim_allowed: true
+
+time_to_next_treatment:
+  endpoint_type: ttnt_proxy
+  time_axis: time_to_next_treatment
+  role: secondary_proxy_endpoint
+  primary_biological_claim_allowed: conditional
+  relapse_or_pfs_claim_allowed: false
+
+# Clinical-anchored longitudinal TT2L: latent state observed through SERIAL clinical labs;
+# TT2L event from regimen/line records. Exposure-aware (treatment transition) but NOT
+# resistance-eligible — "resistance" language stays blocked here.
+clinical_anchored_tt2l:
+  endpoint_type: ttnt_proxy
+  time_axis: time_to_next_treatment
+  role: clinical_anchored_longitudinal_endpoint
+  therapy_exposure_aware: true
+  resistance_eligible: false
+  primary_biological_claim_allowed: conditional
+  relapse_or_pfs_claim_allowed: false
+
+early_progression_24m:
+  endpoint_type: early_progression_landmark
+  role: functional_high_risk_screen
+  primary_biological_claim_allowed: conditional
+  relapse_or_pfs_claim_allowed: conditional

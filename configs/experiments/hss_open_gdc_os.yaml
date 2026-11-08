@@ -1,0 +1,30 @@
+# Hierarchical Subtype Survival (HSS) — OS technical validation on open GDC data.
+seed: 42
+endpoint:
+  name: open_gdc_os
+  claim_scope: overall_survival_only_not_relapse_or_pfs
+paths:
+  clinical: data/real/clinical_survival.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/omics.csv
+  outdir: outputs/hss_open_gdc_os
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, t_14_16, hyperdiploid]
+validation:
+  hss_folds: 5            # patient-disjoint folds; smallest subtype accrues events across folds
+  horizon_months: 24
+training:
+  epochs: 200
+  patience: 30
+  lr: 0.002
+  weight_decay: 0.0001
+  hidden_dim: 64
+  dropout: 0.1
+  distill_weight: 1.0     # lambda for cross-head survival-curve distillation (sweep in full run)
+  distill_start_epoch: 20
+  ema_teacher: false      # fixed on-policy agnostic teacher; ablate vs EMA
+  ema_decay: 0.98

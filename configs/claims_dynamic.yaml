@@ -1,0 +1,38 @@
+# Dynamic claim registry (Stage 1). A claim is only sayable if its evidence tier is satisfied AND the
+# substrate gate passed. Mirrors the static claim-gate discipline; extends it to the timescale hierarchy
+# so a latent pseudo-time is never reported as a calendar-time trajectory.
+
+# Evidence tiers (ascending). A run may only emit claims at or below the tier its DATA supports.
+tiers:
+  public_serial_clinical:
+    requires: [real_serial_substrate_gate_passed, open_or_controlled_serial_labs]
+    allows: [clinically_anchored_longitudinal_progression_process]
+    forbids: [molecular_trajectory_claim]
+
+  baseline_molecular_plus_serial_clinical:
+    requires: [real_serial_substrate_gate_passed, baseline_molecular]
+    allows: [molecularly_conditioned_clinical_progression_dynamics]
+    forbids: [molecular_trajectory_claim]
+
+  distilled_snapshot:
+    requires: [teacher_trained_on_real_serial, fold_safe_teacher_targets]
+    allows: [baseline_only_forecast_distilled_from_longitudinal_supervision]
+    forbids: [claim_snapshot_reveals_true_molecular_path]
+
+  paired_molecular:
+    requires: [real_paired_molecular_timepoints]
+    allows: [molecular_state_transition_modeling]
+    forbids: [dense_trajectory_claim]
+
+  dense_serial_molecular:
+    requires: [real_dense_serial_molecular]
+    allows: [patient_specific_molecular_trajectory_forecasting]
+
+# Hard guards enforced in code (landmark_builder / claim rules), independent of tier:
+guards:
+  latent_time_is_not_calendar_time: true      # a latent tau axis may not be given a calendar horizon
+  no_future_lab_leakage: true
+  no_future_treatment_leakage: true
+  no_post_index_endpoint_leakage: true
+  patient_disjoint_landmark_splits: true
+  synthetic_or_demo_data_cannot_ground_a_scientific_claim: true

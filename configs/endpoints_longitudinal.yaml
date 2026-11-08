@@ -1,0 +1,31 @@
+# Longitudinal endpoint registry (Stage 1). Each landmark endpoint binds to exactly ONE clock in
+# time_axes.yaml and declares its horizons + whether the underlying serial data is open or controlled.
+# Nothing here licenses a claim on absent data — the substrate gate (serial_clinical.require_real_serial
+# _substrate) must pass at run time or the endpoint is unusable.
+
+landmark_progression_90_180_365:
+  clock: clinical_biomarker          # observation clock the state is fit against
+  event_clock: progression           # the endpoint being predicted
+  index_time: current_visit
+  horizons_days: [90, 180, 365]
+  requires_controlled_access: true   # serial IMWG progression = MMRF Researcher-Gateway / dbGaP
+  positive_event_tokens: [progression, relapse, death]
+  description: Visit-anchored landmark probability of progression within each horizon.
+
+landmark_tt2l_90_180_365:
+  clock: clinical_biomarker
+  event_clock: time_to_next_treatment
+  index_time: current_visit
+  horizons_days: [90, 180, 365]
+  requires_controlled_access: true   # regimen start times over time are controlled-tier in CoMMpass
+  positive_event_tokens: [next_treatment, event]
+  description: Visit-anchored landmark probability of next-line therapy within each horizon (TT2L proxy).
+
+landmark_os_180_365_730:
+  clock: clinical_biomarker
+  event_clock: overall_survival
+  index_time: current_visit
+  horizons_days: [180, 365, 730]
+  requires_controlled_access: true   # OS is open, but the SERIAL predictor history is controlled-tier
+  positive_event_tokens: [death, event]
+  description: Visit-anchored landmark OS within each horizon (needs serial predictor history).

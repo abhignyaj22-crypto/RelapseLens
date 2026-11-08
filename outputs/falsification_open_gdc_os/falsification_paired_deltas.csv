@@ -1,0 +1,7 @@
+comparison,cindex_model_a,cindex_model_b,delta_cindex,delta_ci_low,delta_ci_high,p_permutation,bootstrap_tail_mass,claim,p_fdr_bh,p_holm,fdr_significant
+clinical+omics_vs_clinical,0.7299,0.6585,0.0713,-0.021,0.159,0.1579,0.0675,hypothesis_generating_improvement,0.3276,0.7895000000000001,False
+residual_risk_vs_clinical,0.7322,0.6585,0.0736,-0.0299,0.1701,0.1774,0.0795,hypothesis_generating_improvement,0.3276,0.7895000000000001,False
+clinical+cyto+omics_vs_clinical,0.7233,0.6585,0.0647,-0.0329,0.1588,0.2184,0.103,hypothesis_generating_improvement,0.3276,0.7895000000000001,False
+pooled_neural_vs_clinical+omics,0.6973,0.7299,-0.0326,-0.1018,0.0426,0.6947,0.821,no_evidence_of_improvement,0.8336399999999999,1.0,False
+scrambled_subtype_vs_clinical+cyto+omics,0.7205,0.7233,-0.0027,-0.0378,0.0264,0.8761,0.553,no_evidence_of_improvement,0.8761,1.0,False
+permuted_omics_vs_clinical+omics,0.631,0.7299,-0.0989,-0.1955,-0.0031,0.0525,0.9785,no_evidence_of_improvement,0.315,0.315,False

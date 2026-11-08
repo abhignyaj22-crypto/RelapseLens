@@ -1,0 +1,29 @@
+# Direction-2 regularization probe: pooled neural vs pooled penalised Cox (per-subtype IBS).
+seed: 42
+endpoint:
+  name: open_gdc_os
+  claim_scope: overall_survival_only_not_relapse_or_pfs
+paths:
+  clinical: data/real/clinical_survival.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/omics.csv
+  gene_matrix: data/real/gene_matrix.npz
+  outdir: outputs/regularization_open_gdc_os
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, hyperdiploid]
+validation:
+  folds: 5
+features:
+  max_omics_features: 16
+  n_topvar: 2000
+training:
+  epochs: 120
+  patience: 25
+  lr: 0.002
+  weight_decay: 0.0001
+  hidden_dim: 64
+  dropout: 0.1

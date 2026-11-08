@@ -1,0 +1,45 @@
+{
+  "molecular_increment": {
+    "delta_omics_vs_clinical": {
+      "delta": 0.0713,
+      "ci_low": -0.021,
+      "p_perm": 0.1579,
+      "fdr": 0.3276,
+      "fdr_significant": false
+    },
+    "real_minus_permuted_omics_unoC": 0.0558,
+    "claim": "NULL: omics increment not robust (CI/FDR fails or real ~ permuted-omics)"
+  },
+  "subtype_biology": {
+    "delta_subtype_vs_clinical": {
+      "delta": 0.0647,
+      "ci_low": -0.0329,
+      "p_perm": 0.2184,
+      "fdr": 0.3276,
+      "fdr_significant": false
+    },
+    "delta_real_vs_scrambled": {
+      "delta": -0.0027,
+      "ci_low": -0.0378,
+      "p_perm": 0.8761,
+      "fdr": 0.8761,
+      "fdr_significant": false
+    },
+    "claim": "NULL: real subtype ~ scrambled -> do not claim subtype biology"
+  },
+  "nonlinear_gain": {
+    "delta_neural_vs_linear": {
+      "delta": -0.0326,
+      "ci_low": -0.1018,
+      "p_perm": 0.6947,
+      "fdr": 0.8336399999999999,
+      "fdr_significant": false
+    },
+    "claim": "NULL: neural ~ penalized Cox -> do not claim deep-learning advantage"
+  },
+  "pipeline_sanity": {
+    "random_label_unoC": 0.4855,
+    "claim": "OK: random labels ~ 0.5 (no spurious signal / leakage)"
+  },
+  "overall": "H0 retained: no biological structure survives the falsification controls"
+}

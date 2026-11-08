@@ -1,0 +1,42 @@
+seed: 42
+endpoint:
+  name: demo_pfs_like
+  claim_scope: synthetic_smoke_test_only
+paths:
+  clinical: data/demo/clinical.csv
+  cytogenetics: data/demo/cytogenetics.csv
+  omics: data/demo/omics.csv
+  outdir: outputs/demo_run
+schema:
+  id_col: patient_id
+  time_col: time_months
+  event_col: event
+  split_col: split
+  clinical_cols: [age, sex_M, iss_2, iss_3, riss_2, riss_3, line_of_therapy]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, hyperdiploid]
+splitting:
+  strategy: stratified_event
+features:
+  use_clinical: true
+  use_cytogenetics: true
+  use_omics: true
+  omics_transform: auto
+  omics_pca_components: 32
+training:
+  epochs: 3
+  lr: 0.002
+  weight_decay: 0.0001
+  hidden_dim: 48
+  dropout: 0.15
+  patience: 2
+  distill_weight: 0.05
+  distill_start_epoch: 2
+  distill_ramp_epochs: 2
+  ema_decay: 0.97
+  temperature: 2.0
+experiments:
+  models: [subtype_event_rate, cox, opsd_cox, aft, opsd_aft, fht, opsd_fht]
+  min_subtype_n: 15
+  min_subtype_events: 5
+  bootstrap: 20
+  min_test_events: 1

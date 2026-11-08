@@ -1,0 +1,2 @@
+source: data/real/program_activity.csv
+description: curated MM signature mean-z program activities (interpretable alt to PCA)

@@ -1,0 +1,9 @@
+arm,n_folds,mean_uno_cindex,sd_uno_cindex,mean_ipcw_ibs
+clinical,5,0.7255,0.0551,0.1397
+clinical+omics,5,0.7511,0.0405,0.1263
+residual_risk,5,0.7458,0.0474,0.1291
+clinical+cyto+omics,5,0.7455,0.0416,0.1281
+pooled_neural,5,0.7071,0.0509,0.2168
+scrambled_subtype,5,0.7422,0.0435,0.1268
+permuted_omics,5,0.6953,0.0526,0.1435
+random_label,5,0.4855,0.0397,0.1859

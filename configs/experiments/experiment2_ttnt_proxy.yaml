@@ -1,0 +1,17 @@
+# Experiment 2 (FUTURE): time-to-next-treatment proxy — secondary endpoint.
+seed: 42
+endpoint:
+  name: time_to_next_treatment
+paths:
+  clinical: data/controlled/clinical_ttnt.csv
+  cytogenetics: data/real/cytogenetics.csv
+  omics: data/real/omics.csv
+  outdir: outputs/experiment2_ttnt_proxy
+schema:
+  id_col: patient_id
+  time_col: ttnt_time
+  event_col: ttnt_event
+  clinical_cols: [age, sex_M, iss_2, iss_3, line_of_therapy, albumin, b2m]
+  cytogenetic_cols: [amp1q, del1p, del13q, del17p, t_4_14, t_11_14, t_14_16, hyperdiploid]
+cohort: {matched_ablation: true, require_omics: true, require_cytogenetics: true}
+evaluation: {repeated_splits: 50, horizon_months: 12, external_validation_available: false}

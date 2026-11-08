@@ -1,0 +1,3 @@
+type: residual_tte
+risk_decomposition: clinical_plus_molecular_residual
+penalizer: 0.1

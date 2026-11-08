@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0",
+  "benchmark": "MMTTE-falsification-open-gdc-os",
+  "endpoint": "overall_survival",
+  "primary_metric": "uno_ipcw_c_index",
+  "provenance": {
+    "n_matched": 726,
+    "n_folds": 5,
+    "seed": 42,
+    "omics_k": 16,
+    "n_topvar": 2000,
+    "clinical_cols": [
+      "age",
+      "sex_M",
+      "iss_2",
+      "iss_3",
+      "line_of_therapy",
+      "albumin",
+      "b2m"
+    ],
+    "cyto_cols": [
+      "amp1q",
+      "del1p",
+      "del13q",
+      "del17p",
+      "hyperdiploid"
+    ]
+  },
+  "leaderboard": [
+    {
+      "arm": "clinical",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7255,
+      "sd_uno_cindex": 0.0551,
+      "mean_ipcw_ibs": 0.1397
+    },
+    {
+      "arm": "clinical+omics",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7511,
+      "sd_uno_cindex": 0.0405,
+      "mean_ipcw_ibs": 0.1263
+    },
+    {
+      "arm": "residual_risk",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7458,
+      "sd_uno_cindex": 0.0474,
+      "mean_ipcw_ibs": 0.1291
+    },
+    {
+      "arm": "clinical+cyto+omics",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7455,
+      "sd_uno_cindex": 0.0416,
+      "mean_ipcw_ibs": 0.1281
+    },
+    {
+      "arm": "pooled_neural",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7071,
+      "sd_uno_cindex": 0.0509,
+      "mean_ipcw_ibs": 0.2168
+    },
+    {
+      "arm": "scrambled_subtype",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.7422,
+      "sd_uno_cindex": 0.0435,
+      "mean_ipcw_ibs": 0.1268
+    },
+    {
+      "arm": "permuted_omics",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.6953,
+      "sd_uno_cindex": 0.0526,
+      "mean_ipcw_ibs": 0.1435
+    },
+    {
+      "arm": "random_label",
+      "n_folds": 5,
+      "mean_uno_cindex": 0.4855,
+      "sd_uno_cindex": 0.0397,
+      "mean_ipcw_ibs": 0.1859
+    }
+  ],
+  "paired_deltas": [
+    {
+      "comparison": "clinical+omics_vs_clinical",
+      "cindex_model_a": 0.7299,
+      "cindex_model_b": 0.6585,
+      "delta_cindex": 0.0713,
+      "delta_ci_low": -0.021,
+      "delta_ci_high": 0.159,
+      "p_permutation": 0.1579,
+      "bootstrap_tail_mass": 0.0675,
+      "claim": "hypothesis_generating_improvement",
+      "p_fdr_bh": 0.3276,
+      "p_holm": 0.7895000000000001,
+      "fdr_significant": false
+    },
+    {
+      "comparison": "residual_risk_vs_clinical",
+      "cindex_model_a": 0.7322,
+      "cindex_model_b": 0.6585,
+      "delta_cindex": 0.0736,
+      "delta_ci_low": -0.0299,
+      "delta_ci_high": 0.1701,
+      "p_permutation": 0.1774,
+      "bootstrap_tail_mass": 0.0795,
+      "claim": "hypothesis_generating_improvement",
+      "p_fdr_bh": 0.3276,
+      "p_holm": 0.7895000000000001,
+      "fdr_significant": false
+    },
+    {
+      "comparison": "clinical+cyto+omics_vs_clinical",
+      "cindex_model_a": 0.7233,
+      "cindex_model_b": 0.6585,
+      "delta_cindex": 0.0647,
+      "delta_ci_low": -0.0329,
+      "delta_ci_high": 0.1588,
+      "p_permutation": 0.2184,
+      "bootstrap_tail_mass": 0.103,
+      "claim": "hypothesis_generating_improvement",
+      "p_fdr_bh": 0.3276,
+      "p_holm": 0.7895000000000001,
+      "fdr_significant": false
+    },
+    {
+      "comparison": "pooled_neural_vs_clinical+omics",
+      "cindex_model_a": 0.6973,
+      "cindex_model_b": 0.7299,
+      "delta_cindex": -0.0326,
+      "delta_ci_low": -0.1018,
+      "delta_ci_high": 0.0426,
+      "p_permutation": 0.6947,
+      "bootstrap_tail_mass": 0.821,
+      "claim": "no_evidence_of_improvement",
+      "p_fdr_bh": 0.8336399999999999,
+      "p_holm": 1.0,
+      "fdr_significant": false
+    },
+    {
+      "comparison": "scrambled_subtype_vs_clinical+cyto+omics",
+      "cindex_model_a": 0.7205,
+      "cindex_model_b": 0.7233,
+      "delta_cindex": -0.0027,
+      "delta_ci_low": -0.0378,
+      "delta_ci_high": 0.0264,
+      "p_permutation": 0.8761,
+      "bootstrap_tail_mass": 0.553,
+      "claim": "no_evidence_of_improvement",
+      "p_fdr_bh": 0.8761,
+      "p_holm": 1.0,
+      "fdr_significant": false
+    },
+    {
+      "comparison": "permuted_omics_vs_clinical+omics",
+      "cindex_model_a": 0.631,
+      "cindex_model_b": 0.7299,
+      "delta_cindex": -0.0989,
+      "delta_ci_low": -0.1955,
+      "delta_ci_high": -0.0031,
+      "p_permutation": 0.0525,
+      "bootstrap_tail_mass": 0.9785,
+      "claim": "no_evidence_of_improvement",
+      "p_fdr_bh": 0.315,
+      "p_holm": 0.315,
+      "fdr_significant": false
+    }
+  ],
+  "decision": {
+    "molecular_increment": {
+      "delta_omics_vs_clinical": {
+        "delta": 0.0713,
+        "ci_low": -0.021,
+        "p_perm": 0.1579,
+        "fdr": 0.3276,
+        "fdr_significant": false
+      },
+      "real_minus_permuted_omics_unoC": 0.0558,
+      "claim": "NULL: omics increment not robust (CI/FDR fails or real ~ permuted-omics)"
+    },
+    "subtype_biology": {
+      "delta_subtype_vs_clinical": {
+        "delta": 0.0647,
+        "ci_low": -0.0329,
+        "p_perm": 0.2184,
+        "fdr": 0.3276,
+        "fdr_significant": false
+      },
+      "delta_real_vs_scrambled": {
+        "delta": -0.0027,
+        "ci_low": -0.0378,
+        "p_perm": 0.8761,
+        "fdr": 0.8761,
+        "fdr_significant": false
+      },
+      "claim": "NULL: real subtype ~ scrambled -> do not claim subtype biology"
+    },
+    "nonlinear_gain": {
+      "delta_neural_vs_linear": {
+        "delta": -0.0326,
+        "ci_low": -0.1018,
+        "p_perm": 0.6947,
+        "fdr": 0.8336399999999999,
+        "fdr_significant": false
+      },
+      "claim": "NULL: neural ~ penalized Cox -> do not claim deep-learning advantage"
+    },
+    "pipeline_sanity": {
+      "random_label_unoC": 0.4855,
+      "claim": "OK: random labels ~ 0.5 (no spurious signal / leakage)"
+    },
+    "overall": "H0 retained: no biological structure survives the falsification controls"
+  }
+}

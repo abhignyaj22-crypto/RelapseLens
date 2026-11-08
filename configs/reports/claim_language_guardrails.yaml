@@ -1,0 +1,12 @@
+# Clinical-language guardrails. If the active endpoint is OS, generated reports
+# must NOT contain these terms (they would overclaim relapse/PFS biology or
+# clinical deployment). Enforced by tests/test_language_guardrails.py.
+forbidden_terms_if_endpoint_os:
+  - relapse prediction
+  - predicts relapse
+  - pfs prediction
+  - predicts pfs
+  - resistance trajectory
+  - clinical decision support
+  - treatment recommendation
+  - ready for clinical use

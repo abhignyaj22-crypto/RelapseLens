@@ -1,0 +1,22 @@
+benchmark:
+  name: mmsygnal
+  source_repo: external/mmSYGNAL-risk-prediction-models
+  source_commit: 6017dd8d4210ef65433208dadca80afb6cad8e98
+  license: GPL-3.0
+  mode: external_dependency_not_vendored
+  required_input: program_activity_0_to_140
+  output: outputs/benchmarks/mmSYGNAL/mmsygnal_scores.csv
+
+paths:
+  program_activity: data/real/mmsygnal_program_activity_0_140.csv   # 141 cols 0..140 (NOT vendored program_activity.csv)
+  cytogenetics: data/real/cytogenetics.csv
+  clinical: data/real/clinical_survival.csv
+
+rscript: /home/aj0486@students.ad.unt.edu/micromamba/envs/rsygnal/bin/Rscript
+
+claim_policy:
+  endpoint: open_gdc_os
+  direct_relapse_pfs_claim_allowed: false
+  clinical_use_allowed: false
+  research_benchmark_allowed: true
+  note: mmSYGNAL targets relapse/PFS; OS evaluation is discrimination benchmark only.

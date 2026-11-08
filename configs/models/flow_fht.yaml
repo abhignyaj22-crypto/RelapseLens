@@ -1,0 +1,48 @@
+# Part II — dynamic flow→FHT model (ResistanceMap L2 "when" gap).
+# Backward-compatible: dynamics.kind=static reproduces today's model bit-for-bit.
+#
+# STATUS (pre-registered falsification, Stage 5): on open GDC OS the trained flow field does
+# NOT beat StaticDynamics (ΔC +0.021, CI [-0.128,+0.212]) and does NOT beat a random/frozen
+# field (ΔC -0.027, CI [-0.116,+0.121]) → PROMOTE_dynamic = false → the pipeline KEEPS STATIC.
+# See outputs/flow/flow_gate.json and docs/MODEL_CARD.md. This config documents the model and
+# reproduces the gate; it is not promoted to the manuscript path.
+model:
+  type: resistance_model
+  dynamics:
+    kind: flow_matching            # static | flow_matching
+    latent_dim: 32
+    cond_dim: 0                    # population field: patient-specificity via initial state z0 + barrier
+    hidden: 128
+    integrator: euler
+    n_steps: 8
+    bridge_sigma: 0.10
+  fusion: cross_attention          # or residual (interpretable)
+  head: fht                        # reuses the verified defective crossing head
+  readout: monotone                # w_c >= 0 (softplus) for sign identifiability
+  barrier: global                  # softplus(a); per_stratum is a documented refinement
+  loss_weights:
+    fht: 1.0
+    cfm: 0.5
+    vae_recon: 0.0                 # available (Stage-D VAE) but off in the gate run
+    transfer_mmd: 0.0
+    calibration: 0.0
+    residual_additivity: 0.0
+
+stage_marginals:
+  source: data/external/scrna/stage_marginals   # built by mm_tte_survival.data.stage_marginals
+  atlas: GSE271107                               # public 10x, all 4 stages (whole BM aspirate)
+  stages: [HD, MGUS, SMM, MM]
+  embed_with: transcriptome_encoder              # live encoder, in-fold PCA(16) projected
+  pairs: consecutive                             # (HD,MGUS),(MGUS,SMM),(SMM,MM)
+  note: >
+    GSE124310 (CD138-neg microenvironment) intentionally excluded — different compartment.
+    Only the MM endpoint separates cleanly (2.24x HD marker mean); pre-malignant stages
+    overlap, so the field is identified mainly along the pre-malignant->MM direction.
+
+gate:                                            # Stage 5 pre-registered promotion rule
+  metric: uno_ipcw_cindex
+  repeated_splits: 12
+  must_beat: [static, random_field]              # AND, each with CI lower bound > 0
+  else: keep_static
+
+endpoint: { name: open_gdc_os }    # public; OS never licenses relapse/PFS language
